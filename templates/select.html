@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Doctor Selection</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    /* Custom CSS styles */
+    h1 {
+      color: #007bff;
+      text-align: center;
+      margin-top: 20px;
+      margin-bottom: 30px;
+    }
+
+    .doctor-card {
+      margin-bottom: 20px;
+    }
+
+    .doctor-card .card-body {
+      background-color: #f8f9fa;
+    }
+
+    .doctor-card .card-title {
+      color: #007bff;
+      font-weight: bold;
+    }
+
+    .doctor-card .card-specialties {
+      color: #28a745;
+      font-style: italic;
+    }
+
+    .doctor-card .card-fee {
+      color: #dc3545;
+      font-weight: bold;
+    }
+
+    .select-button {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 8px 16px;
+      cursor: pointer;
+    }
+
+    .select-button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <h1>Doctor Selection</h1>
+
+  <div class="container">
+    <div class="row">
+      {% for doctor in doctors %}
+      <div class="col-md-4">
+        <div class="doctor-card">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">{{ doctor.name }}</h5>
+              <p class="card-specialties">Specialties: {{ doctor.specialties }}</p>
+              <p class="card-fee">Fee: Rs.{{ doctor.fee }}</p>
+              <form method="POST" action="/select_doctor">
+                <input type="hidden" name="doctor_id" value="{{ doctor.id }}">
+                <input type="hidden" name="doctor_name" value="{{ doctor.name }}">
+                <input type="hidden" name="doctor_fee" value="{{ doctor.fee }}">
+                <input type="hidden" name="doctor_status" value="{{ doctor.doctor_status }}">
+                <button type="submit" class="btn select-button">Select</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <script>
+    // Add any JavaScript code here if needed
+  </script>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Appointment Checkout</title>
+    <style>
+        /* General Styles */
+        body {
+            background-color: #f2f2f2; /* Light gray background */
+            font-family: Arial, sans-serif; /* Updated font */
+            padding-top: 80px;
+            color: #444; /* Dark gray text color */
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #cccccc; /* Light gray border */
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column; /* Updated to column layout */
+            align-items: center; /* Center horizontally */
+        }
+
+        /* Header Styles */
+        h1 {
+            background-color: #007bff; /* Blue header */
+            color: #fff;
+            padding: 15px;
+            text-align: center;
+            margin: 0;
+            border-radius: 10px; /* Rounded corners */
+            width: 100%; /* Full width */
+            box-sizing: border-box; /* Include padding in width */
+        }
+
+        /* Doctor Data Section */
+        .doctor-data {
+            background-color: #f8f9fa; /* Light gray background */
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0; /* Spacing between sections */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Box shadow for depth */
+            width: 100%; /* Full width */
+            box-sizing: border-box; /* Include padding in width */
+            text-align: center; /* Center text */
+        }
+
+        .doctor-info {
+            color: #007bff; /* Red text color */
+            font-size: 24px; /* Increased font size */
+            margin-bottom: 10px;
+        }
+
+        .fee-info {
+            color: #007bff; /* Blue text color */
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        /* Card Styles (for the Form) */
+        .card {
+            width: 100%; /* Full width */
+            box-sizing: border-box; /* Include padding in width */
+            text-align: center; /* Center form elements */
+        }
+
+        /* Button Styles */
+        .jazzcash-button {
+            background-color: #ff0048; /* Blue button */
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            padding: 12px 40px; /* Increased padding */
+            transition: background-color 0.3s ease;
+            width: auto; /* Auto width */
+            box-sizing: border-box; /* Include padding in width */
+            display: inline-block; /* Make it inline block */
+        }
+
+        .jazzcash-button:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Checkout</h1>
+        <div class="doctor-data">
+            <h2 class="doctor-info">Doctor Information</h2> <!-- Changed to h2 -->
+            <p class="doctor-info">Name: {{ product_name }}</p>
+            <p class="fee-info">Fee: <span style="color: #3fa728;">PKR {{ product_price }}</span></p>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <form id="jazzcashForm" method="POST" action="https://sandbox.jazzcash.com.pk/CustomerPortal/transactionmanagement/merchantform/">
+                    {% for key, value in post_data.items() %}
+                    <input type="hidden" name="{{ key }}" value="{{ value }}">
+                    {% endfor %}
+                    <button type="button" class="jazzcash-button" onclick="submitForm()">Pay with JazzCash</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function submitForm() {
+            document.getElementById("jazzcashForm").submit();
+        }
+    </script>
+</body>
+</html>
